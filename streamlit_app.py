@@ -1,5 +1,5 @@
 import streamlit as st
-import pandas as pd
+
 st.sidebar.title("MENU DE OPCIONES")
 selected = st.sidebar.selectbox("SELECCIONA UNA OPCION", ["Total de ventas", "Total ventas cliente","Ventas por Dia","Ventas por Fecha"])
 
@@ -11,3 +11,4 @@ elif selected=="Ventas por Dia":
     st.title("Bienvenido a la pagina de ventas por dia")
 elif selected=="Ventas por Fecha":
     st.title("Bienvenido a la pagina de ventas por fecha")
+
