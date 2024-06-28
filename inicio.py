@@ -2,22 +2,27 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 
+import pandas as pd
+import streamlit as st
+import matplotlib.pyplot as plt
+
 def mostrar():
-    # Cargar datos desde el archivo CSV
     file_path = 'data/ventas_traducido_completo.csv'
     ventas_df = pd.read_csv(file_path)
-    
-    # Agrupar datos por 'Descripcion' y sumar la 'Cantidad'
-    data = ventas_df.groupby('Descripcion')['Cantidad'].sum().reset_index()
-    
-    # Preparar datos para etiquetas y tamaños de secciones del gráfico de pastel
-    labels = data['Descripcion'].tolist() # Usamos los índices de 'data' como etiquetas
-    sizes = data['Cantidad'].tolist()  # Usamos los valores de 'data' como tamaños
+    st.write(ventas_df)
+    st.write(ventas_df.shape)
 
-    # Crear gráfico de pastel
+def mostrar_grafico_pie():
+    file_path = 'data/ventas_traducido_completo.csv'
+    ventas_df = pd.read_csv(file_path)
+    # Agrupar datos por 'Descripcion' y sumar la 'Cantidad'
+    data = ventas_df.groupby('Descripcion')['Cantidad'].sum()
+    
+    # Crear gráfico de pie
     fig, ax = plt.subplots()
-    ax.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=False, startangle=90)
+    ax.pie(data, labels=data.index, autopct='%1.1f%%', startangle=90)
     ax.axis('equal')  # Para asegurar que el gráfico es un círculo.
+
     # Mostrar gráfico en Streamlit
     st.pyplot(fig)
 

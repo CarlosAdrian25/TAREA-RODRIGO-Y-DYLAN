@@ -1,12 +1,29 @@
 import streamlit as st
-from inicio import mostrar
+from inicio import mostrar,mostrar_grafico_pie
 from total_ventas_cliente import mostrar_py
+import pandas as pd
+import matplotlib.pyplot as plt
 
 st.sidebar.title("MENU DE OPCIONES")
 selected = st.sidebar.selectbox("SELECCIONA UNA OPCION", ["INICIO", "Total de ventas", "Total ventas cliente", "Ventas por Dia", "Ventas por Fecha"])
 
 if selected == "INICIO":
-    mostrar()
+    file_path = 'data/ventas_traducido_completo.csv'
+    ventas_df = pd.read_csv(file_path)
+
+    # Agrupar datos por 'Descripcion' y sumar la 'Cantidad'
+    data = ventas_df.groupby('Descripcion')['Cantidad'].sum()
+
+# Crear gráfico de pie
+    fig, ax = plt.subplots()
+    ax.pie(data, labels=data.index, autopct='%1.1f%%', startangle=90)
+    ax.axis('equal')  # Para asegurar que el gráfico es un círculo.
+
+# Guardar el gráfico de pie como una imagen
+    output_image_path = 'ventas_pie_chart.png'
+    fig.savefig(output_image_path)
+
+    print(f"Gráfico de pastel guardado en {output_image_path}")
 elif selected == "Total de ventas":
     where_to = st.sidebar.selectbox("Total de ventas:", ["Unidades Factura", "Valor por Factura"])
     if where_to == "Unidades Factura":
