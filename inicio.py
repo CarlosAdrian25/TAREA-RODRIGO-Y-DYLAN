@@ -53,10 +53,15 @@ def total_ventas_por_dia():
     st.title('CANTIDAD DE VENTAS POR DÍA')
     st.write(total_ventas)
 
-def total_ventas_por_pais():
-    file_path = 'data/ventas_traducido_completo.csv'
+def total():
+    file_path = 'data/ventas_traducido.csv'
     ventas_df = pd.read_csv(file_path)
-    total_ventas = ventas_df.groupby('Pais')['Cantidad'].sum().reset_index()
-    total_ventas.columns = ['Pais', 'TotalVentas']
-    st.title('CANTIDAD DE VENTAS POR PAÍS')
-    st.write(total_ventas)
+    
+    # Agrupar por 'NoFactura' y calcular la suma de 'Total' para cada factura
+    total_por_factura = ventas_df.groupby('NoFactura').agg({'Total': 'sum'}).reset_index()
+    
+    # Mostrar el título utilizando st.title si estás usando Streamlit
+    st.title('TOTAL DE VENTAS POR FACTURA')
+    
+    # Mostrar los resultados utilizando st.write
+    st.write(total_por_factura)

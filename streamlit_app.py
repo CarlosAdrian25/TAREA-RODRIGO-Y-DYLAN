@@ -1,5 +1,5 @@
 import streamlit as st
-from inicio import mostrar,total_ventas_por_dia,total_Factura,total_ventas_por_Fecha,total_ventas_por_CLIENTE,total_ventas_por_pais
+from inicio import mostrar,total_ventas_por_dia,total_Factura,total_ventas_por_Fecha,total_ventas_por_CLIENTE,total
 from total_ventas_cliente import mostrar_py
 
 st.sidebar.title("MENU DE OPCIONES")
@@ -12,7 +12,7 @@ if selected == "INICIO":
     total_ventas_por_CLIENTE()
     total_ventas_por_Fecha()
     total_ventas_por_dia()
-    total_ventas_por_pais()
+    total()
 elif selected == "Total de ventas":
     where_to = st.sidebar.selectbox("Total de ventas:", ["Unidades Factura", "Valor por Factura"])
     if where_to == "Unidades Factura":
