@@ -8,17 +8,16 @@ def mostrar():
     ventas_df = pd.read_csv(file_path)
     
     # Agrupar datos por 'Descripcion' y sumar la 'Cantidad'
-    data = ventas_df.groupby('Descripcion')['Cantidad'].sum()
+    data = ventas_df.groupby('Descripcion')['Cantidad'].sum().reset_index()
     
     # Preparar datos para etiquetas y tamaños de secciones del gráfico de pastel
-    labels = data.index  # Usamos los índices de 'data' como etiquetas
-    sizes = data.values  # Usamos los valores de 'data' como tamaños
+    labels = data['Descripcion'].tolist() # Usamos los índices de 'data' como etiquetas
+    sizes = data['Cantidad'].tolist()  # Usamos los valores de 'data' como tamaños
 
     # Crear gráfico de pastel
     fig, ax = plt.subplots()
-    ax.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90)
+    ax.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=False, startangle=90)
     ax.axis('equal')  # Para asegurar que el gráfico es un círculo.
-
     # Mostrar gráfico en Streamlit
     st.pyplot(fig)
 
