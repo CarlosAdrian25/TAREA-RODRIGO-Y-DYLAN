@@ -1,7 +1,6 @@
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
-import numpy as np
 
 def mostrar():
     # Cargar datos desde el archivo CSV
@@ -14,12 +13,12 @@ def mostrar():
     # Preparar datos para etiquetas y tamaños de secciones del gráfico de pastel
     labels = data.index  # Usamos los índices de 'data' como etiquetas
     sizes = data.values  # Usamos los valores de 'data' como tamaños
-    
+
     # Crear gráfico de pastel
     fig, ax = plt.subplots()
     ax.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90)
     ax.axis('equal')  # Para asegurar que el gráfico es un círculo.
-    
+
     # Mostrar gráfico en Streamlit
     st.pyplot(fig)
 
