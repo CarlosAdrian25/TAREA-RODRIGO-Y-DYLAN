@@ -1,11 +1,12 @@
 import streamlit as st
-from inicio import mostrar, mostrar_grafico_pie
+from inicio import mostrar,mostrar_grafico_pie
 
 st.sidebar.title("MENU DE OPCIONES")
-selected = st.sidebar.selectbox("SELECCIONA UNA OPCION", ["INICIO", "Total de ventas", "Total ventas cliente", "Ventas por Dia", "Ventas por Fecha", "Grafico de Pie"])
+selected = st.sidebar.selectbox("SELECCIONA UNA OPCION", ["INICIO", "Total de ventas", "Total ventas cliente", "Ventas por Dia", "Ventas por Fecha"])
 
 if selected == "INICIO":
     mostrar()
+    mostrar_grafico_pie()
 elif selected == "Total de ventas":
     where_to = st.sidebar.selectbox("Total de ventas:", ["Unidades Factura", "Valor por Factura"])
     if where_to == "Unidades Factura":
@@ -26,8 +27,5 @@ elif selected == "Ventas por Dia":
         st.title("Valor")
 elif selected == "Ventas por Fecha":
     st.title("Bienvenido a la pagina de ventas por fecha")
-elif selected == "Grafico de Pie":
-    mostrar_grafico_pie()
-
 
 
