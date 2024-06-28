@@ -1,27 +1,23 @@
-import streamlit as st
 import pandas as pd
+import streamlit as st
 import matplotlib.pyplot as plt
 
-def generar_grafico_torta(file_path):
-    # Cargar el archivo CSV
+def mostrar():
+    file_path = 'data/ventas_traducido_completo.csv'
     ventas_df = pd.read_csv(file_path)
+    st.write(ventas_df)
+    st.write(ventas_df.shape)
+
+def mostrar_grafico_pie():
+    file_path = 'data/ventas_traducido_completo.csv'
+    ventas_df = pd.read_csv(file_path)
+    # Agrupar datos por 'Descripcion' y sumar la 'Cantidad'
+    data = ventas_df.groupby('Descripcion')['Cantidad'].sum()
     
-    # Agregar las ventas por descripción de producto
-    sales_by_product = ventas_df.groupby('Descripcion')['Cantidad'].sum()
-    
-    # Calcular porcentajes
-    sales_by_product_percentage = sales_by_product / sales_by_product.sum() * 100
-    
-    # Crear el gráfico de torta
-    fig, ax = plt.subplots(figsize=(10, 8))
-    sales_by_product_percentage.plot(kind='pie', autopct='%1.1f%%', ax=ax)
-    ax.set_title('Porcentaje de Ventas por Producto')
-    ax.set_ylabel('')  # Ocultar etiqueta del eje y
+    # Crear gráfico de pie
+    fig, ax = plt.subplots()
+    ax.pie(data, labels=data.index, autopct='%1.1f%%', startangle=90)
+    ax.axis('equal')  # Para asegurar que el gráfico es un círculo.
+
+    # Mostrar gráfico en Streamlit
     st.pyplot(fig)
-
-# Usar Streamlit para mostrar el gráfico
-st.title("Gráfico de Torta de Ventas por Producto")
-
-file_path = 'data/ventas_traducido_completo.csv'
-generar_grafico_torta(file_path)
-
