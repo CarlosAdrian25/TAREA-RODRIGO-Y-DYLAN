@@ -1,9 +1,11 @@
 import streamlit as st
 
 st.sidebar.title("MENU DE OPCIONES")
-selected = st.sidebar.selectbox("SELECCIONA UNA OPCION", ["Total de ventas", "Total ventas cliente","Ventas por Dia","Ventas por Fecha"])
+selected = st.sidebar.selectbox("SELECCIONA UNA OPCION", ["INCIO","Total de ventas", "Total ventas cliente","Ventas por Dia","Ventas por Fecha"])
 
-if selected == "Total de ventas":
+if selected=="INICIO":
+    st.title("Total de ventas")
+elif selected == "Total de ventas":
     where_to= st.sidebar.selectbox("Total de ventas:", ["Unidades Factura", "Valor por Factura"])
     if where_to == "Unidades Factura":
         st.title("Unidades Factura")
